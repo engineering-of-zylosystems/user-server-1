@@ -1,7 +1,9 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import List, Optional
-from zylo_docs.integration import add_zylo_docs
+from mangum import Mangum
+
+# from zylo_docs.integration import add_zylo_docs
 
 app = FastAPI()
 
@@ -37,4 +39,5 @@ def create_pet(pet: Pet):
     pets_db.append(pet)
     return pet
 
-add_zylo_docs(app)
+handler = Mangum(app)
+# add_zylo_docs(app)
